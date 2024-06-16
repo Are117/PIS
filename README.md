@@ -20,6 +20,13 @@ En cuanto al software, se necesita:
 - El panel solar.
 
 ## Instrucciones de Instalación
+1. En el repositorio, en la sección "code" copia el link del repositorio.
+2. Crea una carpeta en tu equipo, no importa el nombre, servirá para almacenar el repositorio clonado
+3. Ingresa a la carpeta
+4. Borra la ubicación actual de la carpeta y en su lugar escribe cmd. Esto hará que se abra una terminal
+5. En la terminal, escribe: git clone y luego pega el código del repositorio.
+6. Espera a que se termine de clonar el repositorio y cierra la terminal.
+7. Si abres la carpeta que creaste, podrás ver que ya cuenta con los elementos del repositorio, podrías dar doble click sobre el archivo "Algoritmo_Seguimiento_Solar" y abrirlo con Visual Basic
 ## Uso
 Al ejecutar el algpritmo, nos pedirá ingresar los valores de longitud y latitud.
 a continuación presentamos un ejemplo de estos valores para calcular la altitud e inclinación solar en el campus de la UNL:
