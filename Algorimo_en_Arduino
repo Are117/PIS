@@ -1,0 +1,27 @@
+#include <Servo.h>
+
+// Variables
+int pinServo = 7; // Indicamos el valor del pin del motor
+Servo motor; // Servo pasa a ser una variable al estar definido con la importación de la librería
+int sensor; // Sensor
+
+// Configuración de la programación
+void setup (){
+  Serial.begin(9600); // Comunicación entre el puerto serial y el Arduino
+  motor.attach(pinServo); // Vinculamos el servo al pin
+  motor.write(0); // Inicializa el servo en la posición 0 grados
+  delay(1000); // Espera 1 segundo para asegurarse de que el servo se mueva a la posición inicial
+}
+
+// Programa
+void loop (){
+  sensor = analogRead(A0); // Se lee el valor del sensor
+
+  // Remapeo en base a la intensidad de luz del ambiente, ajustado para moverse de 0 a 180 grados
+  sensor = map(sensor, 300, 999, 0, 180);
+
+  motor.write(sensor); // En función del sensor
+  Serial.print("Posición del servo: ");
+  Serial.println(sensor); // Indicamos la posición del servo
+  delay(2000); // Intervalo de 2 segundos
+}
