@@ -1,27 +1,32 @@
 #include <stdio.h>
 #include <math.h>
 #include <time.h>
+#include <stdlib.h>  // Para usar la función atof
 
 // Función para contar los días de un mes
-int conteoDiasMes(int mes) {
-    int diasPorMes = 31;
+int conteoDiasMes(int mes, int anio) {
+    int diasPorMes = 31;  // Inicialmente se asume que el mes tiene 31 días
     if (mes == 2) {
-        diasPorMes = 29;
+        // Comprobar si el año es bisiesto
+        if ((anio % 4 == 0 && anio % 100 != 0) || (anio % 400 == 0)) {
+            diasPorMes = 29;  // Año bisiesto
+        } else {
+            diasPorMes = 28;  // Año no bisiesto
+        }
     } else if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {
-        diasPorMes = 30;
+        diasPorMes = 30;  // Meses con 30 días (Abril, junio, septiembre y noviembre)
     }
-    return diasPorMes;
+    return diasPorMes;  // Devuelve el número de días del mes
 }
 
 // Función para calcular los días totales entre meses
-int calculoEntreMeses(int mesInicial, int mesActual, int diaInicial, int diaActual) {
+int calculoEntreMeses(int mesInicial, int mesActual, int diaInicial, int diaActual, int anio) {
     int diasTotalesEntreMeses = 0;
     int diasEntreMeses = 0;
     int mesRecorrido = mesInicial;
-    int diasMesInicial = conteoDiasMes(mesInicial);
-    
+
     for (mesRecorrido = mesInicial; mesRecorrido < mesActual; mesRecorrido++) {
-        diasEntreMeses += conteoDiasMes(mesRecorrido);
+        diasEntreMeses += conteoDiasMes(mesRecorrido, anio);
     }
     
     diasTotalesEntreMeses = diasEntreMeses - diaInicial + diaActual;
@@ -30,12 +35,33 @@ int calculoEntreMeses(int mesInicial, int mesActual, int diaInicial, int diaActu
 
 int main() {
     double Latid, Longi;
-    printf("Calcularemos la orientación del Sol e inclinación del Panel Solar\n");
-    printf("Ingresa primero la Latitud y Longitud para proseguir con el cálculo\n");
-    printf("Ingresa la Latitud: ");
-    scanf("%lf", &Latid);
-    printf("Ingresa la Longitud: ");
-    scanf("%lf", &Longi);
+    char buffer[100];
+    
+    printf("Calcularemos la orientacion del Sol e inclinacion del Panel Solar\n");
+    
+    // Obtener la Latitud
+    while (1) {
+        printf("Ingresa la Latitud: ");
+        if (fgets(buffer, sizeof(buffer), stdin)) {
+            if (sscanf(buffer, "%lf", &Latid) == 1) {
+                break;  // Si se pudo leer correctamente, salir del bucle
+            } else {
+                printf("El Dato ingresado no es valido.\n");
+            }
+        }
+    }
+    
+    // Obtener la Longitud
+    while (1) {
+        printf("Ingresa la Longitud: ");
+        if (fgets(buffer, sizeof(buffer), stdin)) {
+            if (sscanf(buffer, "%lf", &Longi) == 1) {
+                break;  // Si se pudo leer correctamente, salir del bucle
+            } else {
+                printf("El Dato ingresado no es valido.\n");
+            }
+        } 
+    }
 
     // Obtener la fecha y la hora actual
     time_t t = time(NULL);
@@ -52,10 +78,10 @@ int main() {
     int mesInicial = 1;
     int diaInicial = 1; // Suponiendo que queremos contar desde el primer día del primer mes
 
-    int n = calculoEntreMeses(mesInicial, mesActual, diaInicial, diaActual);
+    int n = calculoEntreMeses(mesInicial, mesActual, diaInicial, diaActual, anioActual);
 
     // Declinación del sol
-    double PI = 3.14;
+    double PI = 3.14159265358979323846; // Mejor usar M_PI definido en math.h
     double dcoseno = ((360.0 / 365.0) * (n + 10)) * PI / 180.0;
     double declinacionsolar = -23.44 * cos(dcoseno);
 
@@ -95,7 +121,7 @@ int main() {
     double azimuthgrados = azimuth2 * 180.0 / PI;
 
     // Resultados
-    printf("La altura del sol es %.2f y tiene una orientación de %.2f grados respecto al norte\n", angulogrados, azimuthgrados);
+    printf("La altura del sol es %.2f y tiene una orientacion de %.2f grados respecto al norte\n", angulogrados, azimuthgrados);
 
     return 0;
 }
