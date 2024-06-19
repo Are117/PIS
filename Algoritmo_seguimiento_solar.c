@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <math.h>
 #include <time.h>
-#include <stdlib.h>  // Para usar la función atof
 
 // Función para contar los días de un mes
 int conteoDiasMes(int mes, int anio) {
@@ -121,7 +120,7 @@ int main() {
     double azimuthgrados = azimuth2 * 180.0 / PI;
 
     // Resultados
-    printf("La altura del sol es %.2f y tiene una orientacion de %.2f grados respecto al norte\n", angulogrados, azimuthgrados);
+    printf("La altura del sol es %.2f grados y tiene una orientacion de %.2f grados respecto al norte\n", angulogrados, azimuthgrados);
 
     return 0;
 }
