@@ -40,7 +40,7 @@ int main() {
     
     // Obtener la Latitud
     while (1) {
-        printf("Ingresa la Latitud: ");
+        printf("Ingresa la Latitud, el valor debe ser entre -90 grados a +90 grados: ");
         if (fgets(buffer, sizeof(buffer), stdin)) {
             if (sscanf(buffer, "%lf", &Latid) == 1) {
                 break;  // Si se pudo leer correctamente, salir del bucle
@@ -52,7 +52,7 @@ int main() {
     
     // Obtener la Longitud
     while (1) {
-        printf("Ingresa la Longitud: ");
+        printf("Ingresa la Longitud, el valor debe ser entre -180 grados a +180 grados: ");
         if (fgets(buffer, sizeof(buffer), stdin)) {
             if (sscanf(buffer, "%lf", &Longi) == 1) {
                 break;  // Si se pudo leer correctamente, salir del bucle
